@@ -5,18 +5,15 @@
 
 基于 react-hook-form 和 antd@5 的可编辑表格，可自由添加行，删除行，编辑行，校验行，自定义单元格组件等。
 
-
 https://github.com/yunfengsa/editable-form/assets/10361986/7e816479-17c7-4596-8317-91ff19ace236
 
-
-demo地址：[https://onehacker.top/_gdemo/editable-form](https://onehacker.top/_gdemo/editable-form)
+demo 地址：[https://onehacker.top/\_gdemo/editable-form](https://onehacker.top/_gdemo/editable-form)
 
 ## Usage
 
 npm install @onehacker/editable-form --save
 
 ```tsx
-
 import Editable, { RefInstance } from '@onehacker/editable-form';
 import { Button, Divider, Space } from 'antd';
 import React, { useRef, useState } from 'react';
@@ -24,7 +21,7 @@ import React, { useRef, useState } from 'react';
 type Value = {
   id: string | number;
   name: string;
-}
+};
 const value: Value[] = [
   {
     id: 1,
@@ -36,41 +33,37 @@ const value: Value[] = [
   },
 ];
 export default () => {
-  const currentRef = useRef<RefInstance<Value>>(null);
-  const [log, setLog] = useState({});
+  const currentRef = useRef<RefInstance<Value[]>>(null);
   return (
     <Editable
-        freedomAdd={true}
-        tableLayout="fixed"
-        ref={currentRef}
-        columns={[
-          {
-            title: '序号',
-            type: 'PureIndex',
-          },
-          {
-            title: '姓名',
-            dataIndex: 'name',
-            type: 'Input',
-            formItemProps: {
-              rules: {
-                required: '请输入姓名',
-                maxLength: {
-                  value: 10,
-                  message: '姓名最多10个字符',
-                },
+      freedomAdd={true}
+      tableLayout="fixed"
+      ref={currentRef}
+      columns={[
+        {
+          title: '序号',
+          dataIndex: 'id',
+          type: 'PureIndex',
+        },
+        {
+          title: '姓名',
+          dataIndex: 'name',
+          type: 'Input',
+          formItemProps: {
+            rules: {
+              required: '请输入姓名',
+              maxLength: {
+                value: 10,
+                message: '姓名最多10个字符',
               },
             },
           },
-        ]}
-        value={value}
-      />
-      <Divider />
+        },
+      ]}
+      value={value}
+    />
   );
 };
-
-
-
 ```
 
 ## Options
@@ -78,7 +71,6 @@ export default () => {
 #### 组件参数
 
 ```tsx
-
 interface CompProps<T> {
   /** 展示的列定义 */
   columns: Column[];
@@ -117,12 +109,11 @@ interface CompProps<T> {
   // 是否展示修改的内容
   changeVisible?: boolean;
 }
-
 ```
 
-
 #### 列定义
-基于antd table的colums进行部分调整，其中formItemsProps.rules为[react-hook-form](https://react-hook-form.com/)的校验规则，其他属性参考antd table的columns
+
+基于 antd table 的 colums 进行部分调整，其中 formItemsProps.rules 为[react-hook-form](https://react-hook-form.com/)的校验规则，其他属性参考 antd table 的 columns
 
 ```
 
@@ -160,35 +151,32 @@ Column {
 
 ```
 
-
-#### 默认内置type类型
+#### 默认内置 type 类型
 
 Input 输入
 
 InputNumber 数字输入
 
 PureIndex 纯序号
-> 约定将Purexxx类型组件作为展示型组件，不可编辑
+
+> 约定将 Purexxx 类型组件作为展示型组件，不可编辑
 
 GenderSelect 性别选择
 
-
 **自定义组件类型**
 
-
-
 ```tsx
+import Editable, {
+  RefInstance,
+  RenderTypesFactory,
+} from '@onehacker/editable-form';
 
-import Editable, { RefInstance, RenderTypesFactory} from '@onehacker/editable-form';
-
-RenderTypesFactory.registerRenderType('Custom', (props: {
-  value: any;
-  onChange: (v: any) => void;
-}) => {
-  return <div>自定义组件</div>;
-});
-
-
+RenderTypesFactory.registerRenderType(
+  'Custom',
+  (props: { value: any; onChange: (v: any) => void }) => {
+    return <div>自定义组件</div>;
+  },
+);
 ```
 
 ## Development
