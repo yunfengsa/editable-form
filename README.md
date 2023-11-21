@@ -5,7 +5,8 @@
 
 基于 react-hook-form 和 antd@5 的可编辑表格，可自由添加行，删除行，编辑行，校验行，自定义单元格组件等。
 
-<video src="./demo.mp4"></video>
+
+https://github.com/yunfengsa/editable-form/assets/10361986/7e816479-17c7-4596-8317-91ff19ace236
 
 
 demo地址：[https://onehacker.top/_gdemo/editable-form](https://onehacker.top/_gdemo/editable-form)
